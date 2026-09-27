@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "cde",
+    "fff"
+  ],
+  "key": {
+    "a": { "item": "minecraft:diamond_hoe" },
+    "b": { "item": "minecraft:emerald_block" },
+    "c": { "item": "minecraft:redstone" },
+    "d": { "item": "automastic:machine_frame" },
+    "e": { "item": "minecraft:beacon" },
+    "f": { "item": "minecraft:iron_block" }
+  },
+  "result": {
+    "count": 1,
+    "id": "automastic:harvester"
+  }
+}

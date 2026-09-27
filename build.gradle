@@ -1,0 +1,105 @@
+plugins {
+    id 'java-library'
+    id 'idea'
+    id 'net.neoforged.moddev' version '2.0.141'
+}
+
+// --- Version et channel (voir gradle.properties) -------------------------------------------
+def allowedChannels = ['alpha', 'beta', 'release']
+def modChannel = project.mod_channel.toString().trim().toLowerCase()
+if (!allowedChannels.contains(modChannel)) {
+    throw new GradleException("mod_channel invalide '${project.mod_channel}' : valeurs acceptees = ${allowedChannels.join(', ')}")
+}
+// release = "0.1.0" ; alpha/beta = "0.1.0-alpha" / "0.1.0-beta"
+def modVersionFull = modChannel == 'release' ? project.mod_version : "${project.mod_version}-${modChannel}"
+
+version = "${minecraft_version}-${modVersionFull}"   // nom du jar : automastic-1.21.1-0.1.0-alpha.jar
+group = mod_group_id
+
+base {
+    archivesName = mod_id
+}
+
+// Mojang ships Java 21 to end users in 1.21.1
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+    version = project.neo_version
+
+    parchment {
+        mappingsVersion = project.parchment_mappings_version
+        minecraftVersion = project.parchment_minecraft_version
+    }
+
+    runs {
+        client {
+            client()
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+        server {
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+        data {
+            data()
+            programArguments.addAll '--mod', project.mod_id, '--all',
+                    '--output', file('src/generated/resources/').getAbsolutePath(),
+                    '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+        configureEach {
+            systemProperty 'neoforge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
+    }
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+    exclude '**/*.bbmodel'
+    exclude 'src/generated/**/.cache'
+}
+
+// Aucune dépendance externe : uniquement Minecraft + NeoForge (fournis par moddev).
+dependencies {
+}
+
+// Injecte les propriétés dans neoforge.mods.toml
+var generateModMetadata = tasks.register('generateModMetadata', ProcessResources) {
+    var replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            neo_version_range      : neo_version_range,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : modVersionFull,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description
+    ]
+    inputs.properties replaceProperties
+    expand replaceProperties
+    from 'src/main/templates'
+    into 'build/generated/sources/modMetadata'
+}
+sourceSets.main.resources.srcDir generateModMetadata
+neoForge.ideSyncTask generateModMetadata
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}

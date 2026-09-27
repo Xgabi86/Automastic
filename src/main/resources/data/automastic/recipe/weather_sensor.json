@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "grg",
+    "rdr",
+    "cfc"
+  ],
+  "key": {
+    "g": { "item": "minecraft:glass_pane" },
+    "r": { "item": "minecraft:redstone" },
+    "d": { "item": "minecraft:clock" },
+    "c": { "item": "minecraft:redstone_torch" },
+    "f": { "item": "automastic:machine_frame" }
+  },
+  "result": {
+    "count": 1,
+    "id": "automastic:weather_sensor"
+  }
+}

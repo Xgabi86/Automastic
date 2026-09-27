@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "automastic:block/machine_frame" }
+  }
+}

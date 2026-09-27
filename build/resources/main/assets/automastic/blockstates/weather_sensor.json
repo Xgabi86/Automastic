@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "lit=false": { "model": "automastic:block/weather_sensor" },
+    "lit=true": { "model": "automastic:block/weather_sensor_on" }
+  }
+}

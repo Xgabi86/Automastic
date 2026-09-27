@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[1,)"
+license="MIT"
+
+[[mods]]
+modId="automastic"
+version="0.2.0-alpha"
+displayName="Automastic"
+authors="Aethernode"
+description='''
+Automation machines for farming. Harvester with output inventory. Compatible with Mystical Agriculture.
+'''
+
+[[dependencies.automastic]]
+    modId="neoforge"
+    type="required"
+    versionRange="[21.1.241,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.automastic]]
+    modId="minecraft"
+    type="required"
+    versionRange="[1.21.1,1.22)"
+    ordering="NONE"
+    side="BOTH"

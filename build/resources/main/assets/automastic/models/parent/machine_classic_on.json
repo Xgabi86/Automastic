@@ -1,0 +1,8 @@
+{
+	"parent": "automastic:parent/machine_classic",
+    "textures": {
+        "left": "automastic:block/machine/harvester/left_on",
+        "right": "automastic:block/machine/harvester/right_on",
+        "front": "automastic:block/machine/harvester/front_on"
+	}
+}

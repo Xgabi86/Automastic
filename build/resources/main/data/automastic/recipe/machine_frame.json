@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "cdc",
+    "efe"
+  ],
+  "key": {
+    "a": { "item": "minecraft:lapis_lazuli" },
+    "b": { "item": "minecraft:comparator" },
+    "c": { "item": "minecraft:redstone_torch" },
+    "d": { "item": "minecraft:iron_block" },
+    "e": { "item": "minecraft:redstone_block" },
+    "f": { "item": "minecraft:gold_ingot" }
+  },
+  "result": {
+    "count": 1,
+    "id": "automastic:machine_frame"
+  }
+}

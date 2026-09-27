@@ -1,0 +1,6 @@
+{
+	"parent": "automastic:parent/machine_vertical",
+    "textures": {
+        "front": "automastic:block/machine/harvester/front_on"
+	}
+}

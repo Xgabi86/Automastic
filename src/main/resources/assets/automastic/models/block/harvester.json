@@ -1,0 +1,7 @@
+{ 
+ 	"parent": "automastic:parent/machine_classic",
+    "textures": { 
+        "base": "automastic:block/machine/harvester/green",
+        "stem": "automastic:block/machine/harvester/obsidian"
+    }
+}
